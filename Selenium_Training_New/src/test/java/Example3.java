@@ -22,34 +22,46 @@ public class Example3 {
             );
         }
 
-        if ("edge".equalsIgnoreCase(browser)) {
+        try {
 
-        	driver = new EdgeDriver();
+            if ("edge".equalsIgnoreCase(browser)) {
 
-            
+                EdgeOptions options = new EdgeOptions();
 
-        } else if ("chrome".equalsIgnoreCase(browser)) {
+                options.addArguments("--headless=new");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--disable-extensions");
 
-            driver = new ChromeDriver();
+                driver = new EdgeDriver(options);
 
-        } else if ("firefox".equalsIgnoreCase(browser)) {
+            } else if ("chrome".equalsIgnoreCase(browser)) {
 
-            driver = new FirefoxDriver();
+                driver = new ChromeDriver();
 
-        } else {
+            } else if ("firefox".equalsIgnoreCase(browser)) {
 
-            throw new IllegalArgumentException(
-                "Unsupported browser: " + browser
-            );
+                driver = new FirefoxDriver();
+
+            } else {
+
+                throw new IllegalArgumentException(
+                    "Unsupported browser: " + browser
+                );
+            }
+
+            driver.manage().window().maximize();
+            driver.get(url);
+
+            System.out.println("Browser: " + browser);
+            System.out.println("Title: " + driver.getTitle());
+            System.out.println("URL: " + driver.getCurrentUrl());
+
+        } finally {
+
+            if (driver != null) {
+                driver.quit();
+            }
         }
-
-        driver.manage().window().maximize();
-
-        driver.get(url);
-
-        System.out.println("Browser: " + browser);
-        System.out.println("Title: " + driver.getTitle());
-
-        driver.quit();
     }
 }
