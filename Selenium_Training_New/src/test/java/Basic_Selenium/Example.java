@@ -19,6 +19,8 @@ public class Example {
     @Test
     public void m2() {
         System.out.println("M2 executed");
+        
+        
     }
 
     @Test
