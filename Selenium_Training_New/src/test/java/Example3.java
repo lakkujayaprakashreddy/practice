@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.Test;
 
@@ -15,8 +16,8 @@ public class Example3 {
 		    driver = new EdgeDriver();
 		} else if ("chrome".equalsIgnoreCase(browser)) {
 		    driver = new ChromeDriver();
-		} else if ("safari".equalsIgnoreCase(browser)) {
-		    driver = new SafariDriver();
+		} else if ("firefox".equalsIgnoreCase(browser)) {
+		    driver = new FirefoxDriver();
 		} else {
 		    throw new IllegalArgumentException(
 		        "Unsupported browser: " + browser
