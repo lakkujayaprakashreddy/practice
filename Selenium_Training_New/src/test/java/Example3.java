@@ -24,13 +24,9 @@ public class Example3 {
 
         if ("edge".equalsIgnoreCase(browser)) {
 
-            EdgeOptions options = new EdgeOptions();
+        	driver = new EdgeDriver();
 
-            options.addArguments("--disable-extensions");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-first-run");
-
-            driver = new EdgeDriver(options);
+            
 
         } else if ("chrome".equalsIgnoreCase(browser)) {
 
