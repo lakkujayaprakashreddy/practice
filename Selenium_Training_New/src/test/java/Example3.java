@@ -7,19 +7,19 @@ import org.testng.annotations.Test;
 public class Example3 {
 	@Test
 	public void abs() {
-		String BROWSER=System.getProperty("browser");
-		String url=System.getProperty("www.myntra.com");
+		String browser=System.getProperty("browser");
+		String url=System.getProperty("url");
 		
 		WebDriver driver = null;
-		if ("edge".equalsIgnoreCase(BROWSER)) {
+		if ("edge".equalsIgnoreCase(browser)) {
 		    driver = new EdgeDriver();
-		} else if ("chrome".equalsIgnoreCase(BROWSER)) {
+		} else if ("chrome".equalsIgnoreCase(browser)) {
 		    driver = new ChromeDriver();
-		} else if ("safari".equalsIgnoreCase(BROWSER)) {
+		} else if ("safari".equalsIgnoreCase(browser)) {
 		    driver = new SafariDriver();
 		} else {
 		    throw new IllegalArgumentException(
-		        "Unsupported browser: " + BROWSER
+		        "Unsupported browser: " + browser
 		    );
 		}
 		driver.get(url);
