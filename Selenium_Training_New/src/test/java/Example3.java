@@ -1,8 +1,7 @@
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.Test;
 
 public class Example3 {
@@ -10,32 +9,40 @@ public class Example3 {
     @Test
     public void abs() {
 
-    	String browser = System.getProperty("browser");
-        String url = System.getProperty("url");
+        String browser = System.getProperty("browser", "edge");
+        String url = System.getProperty("url", "https://www.google.com");
 
         WebDriver driver = null;
 
-        if ("edge".equalsIgnoreCase(browser)) {
-            driver = new EdgeDriver();
+        try {
+            if ("edge".equalsIgnoreCase(browser)) {
 
-        } else if ("chrome".equalsIgnoreCase(browser)) {
-            driver = new ChromeDriver();
+                EdgeOptions options = new EdgeOptions();
+                options.addArguments("--headless=new");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-extensions");
+                options.addArguments("--no-first-run");
+                options.addArguments("--no-default-browser-check");
 
-        } else if ("firefox".equalsIgnoreCase(browser)) {
-            driver = new FirefoxDriver();
+                driver = new EdgeDriver(options);
 
-        } else {
-            throw new IllegalArgumentException(
-                "Unsupported browser: " + browser
-            );
+            } else {
+                throw new IllegalArgumentException(
+                    "Currently supported browser: edge"
+                );
+            }
+
+            driver.get(url);
+
+            System.out.println("Page title: " + driver.getTitle());
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+
+        } finally {
+            if (driver != null) {
+                driver.quit();
+            }
         }
-
-        driver.manage().window().maximize();
-        driver.get(url);
-
-        System.out.println("Title: " + driver.getTitle());
-        System.out.println("Title: " + driver.getTitle());
-
-        driver.quit();
     }
 }
