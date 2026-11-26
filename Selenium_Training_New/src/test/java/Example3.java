@@ -34,6 +34,7 @@ public class Example3 {
         driver.get(url);
 
         System.out.println("Title: " + driver.getTitle());
+        System.out.println("Title: " + driver.getTitle());
 
         driver.quit();
     }
